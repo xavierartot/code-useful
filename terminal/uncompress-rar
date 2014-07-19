@@ -1,0 +1,4 @@
+#decompresse recursivement un dossier avec des rar
+#unrar -y pour enlever les confirmations
+find Article/find Article/ -name '*.rar' -execdir unrar e {} \; -name '*.rar'
+

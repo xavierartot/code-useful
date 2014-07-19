@@ -1,0 +1,2 @@
+Disable the unexpectedly quit dialog that normally appears when an application crashes. Replace "none" with "prompt" to enable again.
+defaults write com.apple.CrashReporter DialogType none

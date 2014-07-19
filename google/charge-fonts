@@ -1,0 +1,8 @@
+# select#fonts
+
+$.get("https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyChZeTZ-DzMW-45IUBXUSuBha9MWEiXXtI",  {},
+function (data) {
+    $.each(data.items, function (index, value) {
+          $('#fonts').append($("<option></option>").attr("value", value.family).text(value.family));
+            });
+});

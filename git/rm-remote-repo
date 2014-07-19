@@ -1,0 +1,51 @@
+To remove a remote repository you enter:
+
+git remote rm origin
+
+// show the remote used
+git remote -v show 
+
+// delete the remote origin
+git remote rm origin
+
+// push the .git to the server
+git push origin master
+
+
+// Creation environnement avec server
+
+etape 1
+// server
+mkdir hub-plugins
+cd hub-plugins
+// initialise git sans repertoire de travail "working directory"
+git init --bare
+
+etape 2
+local
+// add 
+git remote add origin ssh://root@80.248.218.50/home/web/xavier-artot.com/ftp/www/hub-plugins
+// on ajoute .git local qu server
+git push origin master
+
+etape 3
+server
+git clone hub-plugins test
+
+
+// Il faut automatiser les push et clone avec les hooks
+in server
+cd hub-plugins
+l hooks
+// des qu'il recois une modif il va faire des choses
+vim post-update
+
+#!/bin/bash
+echo "********** mise en production *********"
+cd /home/web/xavier-artot.com/ftp/www/wp-content/plugins/menu_css3
+unset GIT_DIR
+git pull origin master
+
+Et on s'assure que ce fichier est éxécutable :
+chmod -x
+

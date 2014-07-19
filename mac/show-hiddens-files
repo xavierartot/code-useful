@@ -1,0 +1,2 @@
+ Show hidden files in the Finder
+ defaults write com.apple.finder AppleShowAllFiles -bool YES 

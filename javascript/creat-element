@@ -1,0 +1,7 @@
+// div objet is faster
+
+var div = $("<div/>", {
+  class: "class",
+  type: "text",
+  html: "default"
+});

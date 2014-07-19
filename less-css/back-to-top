@@ -1,0 +1,17 @@
+<a href="#top" class="back-to-top">Back to top</a>
+
+.back-to-top{
+  background-color: #000;
+  background-color:rgba(0, 0 ,0, 0.75);
+  position: fixed;
+  bottom: 2em;
+  right: 2em;
+  color: right;
+  padding: .5em 1em;
+  text-transform: uppercase;
+  font-size: 1em;
+  font-weight: bold;
+  &:hover{
+    color: @navbar-default-link-hover-color;
+  }
+}

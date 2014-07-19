@@ -1,0 +1,5 @@
+$('input[type=radio]').change(function(){
+  if($(this).find('input[type="radio"]:checked').length === 0 ) {
+    console.log( $(this).val() );
+  }
+}

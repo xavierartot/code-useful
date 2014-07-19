@@ -1,0 +1,11 @@
+#inactive
+defaults write com.apple.dashboard mcx-disabled -boolean TRUE
+killall Dock
+
+#Active
+defaults write com.apple.dashboard mcx-disabled -boolean FALSE
+killall Dock
+
+
+Make hidden applications' dock icons translucent.
+defaults write com.apple.Dock showhidden -bool YES

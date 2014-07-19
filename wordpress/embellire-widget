@@ -1,0 +1,33 @@
+In this quick article, I’ll show you how stop that automatic output and let you have your Admin clarity.
+
+<?php
+/**
+* @package Flexible_Widget_Titles
+* @version 1.0
+*/
+/*
+Plugin Name: Flexible Widget Titles
+Plugin URI: http://premium.wpmudev.org/blog
+Description: Wrap a widget title in [] to prevent it being displayed on your website
+Author: Chris Knowles
+Version: 1.0
+Author URI: http://premium.wpmudev.org/blog
+*/
+
+function flexible_widget_titles( $widget_title ) {
+
+  // get rid of any leading and trailing spaces
+
+  $title = trim( $widget_title );
+
+  // check the first and last character, if [ and ] set the title to empty
+
+  if ( $title[0] == '[' && $title[strlen($title) - 1] == ']' ) $title = '';
+
+  return $title;
+
+}
+
+add_filter( 'widget_title', 'flexible_widget_titles' );
+
+?>

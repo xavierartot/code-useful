@@ -1,0 +1,2 @@
+# suprime des fichiers recursivement
+rm */*.png

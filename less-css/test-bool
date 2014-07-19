@@ -1,0 +1,10 @@
+.debug(@debug) when (@debug = true) {
+  body {
+    background-color: yellow!important;
+    #title {
+      background-color: orange;
+    }
+  }
+}
+// exemple
+.debug(false);
