@@ -1,3 +1,4 @@
+// test boolean with a mixin
 .debug(@debug) when (@debug = true) {
   body {
     background-color: yellow!important;

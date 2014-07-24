@@ -1,0 +1,8 @@
+//Mixins.Define useful functions with or without parameters:
+.box (@w: 500px, @h: 200px) {
+    display: block;
+      width: @w;
+        height: @h;
+}
+//And use them later in your code:
+.modal-dialog ( .box(400px, 700px); }

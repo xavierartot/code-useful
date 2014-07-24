@@ -1,0 +1,13 @@
+// An ampersand (&) refers to the parent rule. So &.category would translate to 
+// "article h2.category" once the LESS code had been compiled.
+article {
+  font-family: serif;
+  line-height: 1.4;
+  h1 {
+    font: 2em bold sans-serif;
+  }
+  h2 {
+    font-size: 1.5em;
+    &.category { color: #666; }
+  }
+}
