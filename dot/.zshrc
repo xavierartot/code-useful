@@ -66,48 +66,6 @@ setopt correctall
 # source ~/.git-completion.bash
 
 
-
-# cdd let you do a cd AND a ls in the same command
-function cdd()
-{
-  if [ "$*" = "" ]
-  then
-    cd
-  else
-    cd "$*";
-  fi
-  dir;
-}
-
-
-extract () {
-    if [ -f $1 ] ; then
-      case $1 in
-        *.tar.bz2)   tar xjf $1     ;;
-        *.tar.gz)    tar xzf $1     ;;
-        *.bz2)       bunzip2 $1     ;;
-        *.rar)       unrar e $1     ;;
-        *.gz)        gunzip $1      ;;
-        *.tar)       tar xf $1      ;;
-        *.tbz2)      tar xjf $1     ;;
-        *.tgz)       tar xzf $1     ;;
-        *.zip)       unzip $1       ;;
-        *.Z)         uncompress $1  ;;
-        *.7z)        7z x $1        ;;
-        *)     echo "'$1' cannot be extracted via extract()" ;;
-         esac
-     else
-         echo "'$1' is not a valid file"
-     fi
-}
-
-
-#Find text in any file
-ft() {
-  find . -name "$2" -exec grep -il "$1" {} \;
-}
-
-
 source ~/wp-completion.bash
 
 fancy-ctrl-z () {
@@ -122,37 +80,6 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-
-alias h="history"
-# Add and commit changes with Git
-alias m="git add -A;git commit -m"
-#copy
-alias pc="pbcopy"
-#cppwd
-alias pcpwd="pwd | tr -d '\n' | pbcopy"
-#paste
-alias pp="pbpaste"
-# Show which commands you use the most
-alias freq='cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -n 30'
-
-alias ....='cd ../../../'
-alias .4='cd ../../../../'
-alias .5='cd ../../../../../'
-alias .6='cd ../../../../../../'
-alias .7='cd ../../../../../../../'
-alias .8='cd ../../../../../../../../'
-# This alias reloads this file
-alias reload_zsh='. ~/.zshrc'
-
-alias c='clear'
-alias dir='ls -alv'
-#alias le='ls --sort=extension'
-#alias lle='ll --sort=extension'
-#alias lt='ls --sort=time'
-#alias llt='ll --sort=time'
-# This alias recursively destroys all .DS_Store files in the folder I am currently in
-alias killDS='find . -name .DS_Store -type f -delete'
-
 # cdd let you do a cd AND a ls in the same command
 function cdd()
 {
@@ -191,6 +118,3 @@ ft() {
   find . -name "$2" -exec grep -il "$1" {} \;
 }
 
-alias h="history"
-# Add and commit changes with Git
-alias m="git add -A;git commit -m"
