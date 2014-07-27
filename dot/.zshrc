@@ -118,3 +118,13 @@ ft() {
   find . -name "$2" -exec grep -il "$1" {} \;
 }
 
+# loading the prompt
+autoload -U promptinit
+promptinit
+# list the promts
+#prompt -l
+prompt elite
+
+# autocompletion intelligente
+autoload -Uz compinit
+compinit
