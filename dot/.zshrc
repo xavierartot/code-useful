@@ -152,3 +152,45 @@ alias dir='ls -alv'
 #alias llt='ll --sort=time'
 # This alias recursively destroys all .DS_Store files in the folder I am currently in
 alias killDS='find . -name .DS_Store -type f -delete'
+
+# cdd let you do a cd AND a ls in the same command
+function cdd()
+{
+  if [ "$*" = "" ]
+  then
+    cd
+  else
+    cd "$*";
+  fi
+  dir;
+}
+
+extract () {
+    if [ -f $1 ] ; then
+      case $1 in
+        *.tar.bz2)   tar xjf $1     ;;
+        *.tar.gz)    tar xzf $1     ;;
+        *.bz2)       bunzip2 $1     ;;
+        *.rar)       unrar e $1     ;;
+        *.gz)        gunzip $1      ;;
+        *.tar)       tar xf $1      ;;
+        *.tbz2)      tar xjf $1     ;;
+        *.tgz)       tar xzf $1     ;;
+        *.zip)       unzip $1       ;;
+        *.Z)         uncompress $1  ;;
+        *.7z)        7z x $1        ;;
+        *)     echo "'$1' cannot be extracted via extract()" ;;
+         esac
+     else
+         echo "'$1' is not a valid file"
+     fi
+}
+
+#Find text in any file
+ft() {
+  find . -name "$2" -exec grep -il "$1" {} \;
+}
+
+alias h="history"
+# Add and commit changes with Git
+alias m="git add -A;git commit -m"
