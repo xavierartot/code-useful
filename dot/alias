@@ -111,3 +111,5 @@ reload_zsh='. ~/.zshrc'
 run-help=man
 sl=ls
 which-command=whence
+vi='vim'
+df -hT
