@@ -1,0 +1,27 @@
+var n = $( "footer .widget" ).length;
+//console.log(n);
+if ( n === 1) {
+  $('.widget').addClass('col-sm-12');
+}else if(n === 2){·
+  $('.widget').addClass('col-sm-6');
+}else if(n === 3){·
+  $('.widget').addClass('col-sm-4');
+}else if(n === 4){·
+  $('.widget').addClass('col-sm-3');
+}else if(n === 5){·
+  $('.widget').addClass('col-sm-2');
+}else if(n === 6){·
+  $('.widget').addClass('col-sm-2');
+}else if(n === 7){·
+  $('.widget').addClass('col-sm-2');
+}else if(n === 8){·
+  $('.widget').addClass('col-sm-2');
+}else if(n === 9){·
+  $('.widget').addClass('col-sm-2');
+}else if(n === 10){
+  $('.widget').addClass('col-sm-2');
+}else if(n === 11){
+  $('.widget').addClass('col-sm-2');
+}else{
+  $('.widget').addClass('col-sm-12');
+}
