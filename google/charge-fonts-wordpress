@@ -1,0 +1,8 @@
+/**
+ * Google Font
+ */
+function load_fonts() {
+    wp_register_style('googleFonts', 'http://fonts.googleapis.com/css?family=Neucha|Great+Vibes|Rock+Salt|Vast+
+    wp_enqueue_style( 'googleFonts');
+  }
+add_action('wp_print_styles', 'load_fonts');
