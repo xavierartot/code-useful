@@ -1,0 +1,6 @@
+<?php
+somme(2,4,7,2,4,6,8,1,4,5,3,5);
+function() {
+  print_r(func_get_args() );
+}
+?>

@@ -1,6 +1,21 @@
+set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+"colorscheme desert 
+colorscheme sorcerer
+au InsertLeave * hi Cursor guibg=red
+au InsertEnter * hi Cursor guibg=green
+
+" sparkup: https://github.com/rstacruz/sparkup/issues/33
+" augroup sparkup_types
+"   " Remove ALL autocommands of the current group.
+"   autocmd!
+"   " Add sparkup to new filetypes
+"   autocmd FileType mustache,php,htmldjango runtime! ftplugin/html/sparkup.vim
+" augroup END
+
 " couleur de theme par fichier
 "execute pathogen#infect()
 set syntax=on
+set encoding=utf-8
 
 ""====[ Make the 101st column stand out ]==================[ Make the 101st column stand out ]==============
 " Asesome 80-character limiter
@@ -12,6 +27,15 @@ set syntax=on
 "exec 'set colorcolumn=' .join(range(2,80,3), ',')
 "highlight ColorColumn ctermbg=magenta
 "call matchadd('ColorColumn', '\%101v', 100)
+
+" This mapping sorts the CSS lines within a {} block. Thanks to sjl from #vim
+"map S ?{jV/\v^\s*\}?$k:sort:noh
+"function SortCss()
+"   for i in range(line("1"), line("$"))
+"       exe "/{"
+"       exe "silent! normal j,S"
+"   endfor
+"endfunction
 
 " visual mode
   nnoremap v <C-V>
@@ -26,13 +50,14 @@ set syntax=on
   vnoremap <C-H> <gv
 
 "====[ Make tabs, trailing whitespace, and non-breaking spaces visible ]======
-  exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
-  set list
+"  exec "set listchars=tab:\uBB\uBB,trail:\uB7,nbsp:~"
+"  set list
 
 "let g:EasyMotion_leader_key = '<Leader><Leader>'
 
 set shell=bash
-
+set timeoutlen=250  " Time to wait after ESC (default causes an annoying delay)
+set history=256  " Number of things to remember in history. 
 set tabstop=2
 set shiftwidth=2
 set expandtab
@@ -66,11 +91,22 @@ set modeline
 set autoread
 set nocompatible
 set report=0
-"set cursorline
-"set scrolloff=4
 set nofoldenable
 set autowrite
-
+set showmatch  " Show matching brackets.
+set matchtime=5  " Bracket blinking.
+set novisualbell  " No blinking
+set noerrorbells  " No noise.
+set laststatus=2  " Always show status line.
+set vb t_vb= " disable any beeps or flashes on error
+set ruler  " Show ruler
+set showcmd " Display an incomplete command in the lower right corner of the Vim window
+set shortmess=atI " Shortens messages
+set foldenable " Turn on folding
+set foldmethod=marker " Fold on the marker
+set foldlevel=100 " Don't autofold anything (but I can still fold manually)
+set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds 
+set mousehide  " Hide mouse after chars typed 
 
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.*/
@@ -83,16 +119,13 @@ if $COLORTERM == 'gnome-terminal'
   set t_Co=256
 endif
 
-set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
-colorscheme desert 
-
 "au VimEnter * RainbowParenthesesToggle
 "au Syntax * RainbowParenthesesLoadRound
 "au Syntax * RainbowParenthesesLoadSquare
 "au Syntax * RainbowParenthesesLoadBraces
 "
 "Search
-set hlsearch
+set hlsearch  " highlight search
 set incsearch
 set ignorecase
 set smartcase
@@ -125,39 +158,9 @@ set statusline=\%L%m%r%h\ %w\ \ pwd:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 noremap <leader>p :set paste<CR>"*p<CR>:set nopaste<CR>
 noremap <leader>P :set paste<CR>"*P<CR>:set nopaste<CR>
 
-"Vundle
-"set rtp+=~/.vim/bundle/vundle/
-"call vundle#rc()
-
-"Bundle 'ctrlp.vim'
-"Bundle 'rizzatti/funcoo.vim'
-"Bundle 'rizzatti/dash.vim'
-"Bundle 'django.vim'
-"Bundle 'nerdtree'
-"Bundle 'php.vim'
-"Bundle 'rainbow_parentheses.vim'
-"Bundle 'vim-clojure-static'
-"Bundle 'vim-coffee-script'
-"Bundle 'vim-fireplace'
-"Bundle 'vim-less'
-"Bundle 'vim-powerline'
-"Bundle 'vim-slime'
-"Bundle 'snipmate.vim'
-"Bundle 'vim-css3-syntax'
-"Bundle 'gmarik/vundle'
-
 "Key Mapping
 :nmap Z :tabprev<CR>
 :nmap X :tabnext<CR>
-
-"Filetype
-" Sparup for php and html
-" augroup sparkup_types
-"   " Remove ALL autocommands of the current group.
-"   autocmd!
-"   " Add sparkup to new filetypes
-"   autocmd FileType php,html runtime! ftplugin/html/sparkup.vim
-" augroup END
 
 au BufRead,BufNewFile *.module set filetype=php
 au BufRead,BufNewFile *.install set filetype=php
@@ -240,3 +243,40 @@ nnoremap <Leader>v V
 vnoremap <silent> y y`]
 vnoremap <silent> p p`]
 nnoremap <silent> p p`]
+
+" powerline plugin
+let g:Powerline_symbols = 'fancy'
+
+filetype off 
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" let Vundle manage Vundle, required
+Plugin 'gmarik/Vundle.vim'
+Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+Bundle 'rizzatti/funcoo.vim'
+Bundle 'rizzatti/dash.vim'
+Bundle 'php.vim'
+"Bundle 'rainbow_parentheses.vim'
+"Bundle 'vim-coffee-script'
+Bundle 'vim-less'
+"Bundle 'jQuery'
+Bundle "Markdown"
+"Bundle "git.zip"
+Bundle "fugitive.vim"
+Bundle "ragtag.vim"
+Bundle 'gmarik/vundle'
+Bundle 'css_color.vim'
+Bundle "MarcWeber/vim-addon-mw-utils"
+"Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+Bundle "honza/vim-snippets"
+Bundle 'mattn/emmet-vim', {'autoload':{'filetypes':['html','xml','xsl','xslt','xsd','css','sass','scss','less','mustache']}} 
+Bundle 'tpope/vim-obsession.git'
+Bundle 'jelera/vim-javascript-syntax'
+Bundle 'pangloss/vim-javascript'
+
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+
+let g:user_emmet_leader_key='<c-y>'
