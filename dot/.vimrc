@@ -18,6 +18,40 @@ vnoremap <C-J> xp`[V`]
 vnoremap <C-L> >gv
 vnoremap <C-H> <gv
 
+" H and L to beginning and end of line
+noremap K H
+noremap J L
+" H and L to beginning and end of line
+noremap H ^
+noremap L g_
+" Disable arrow keys
+noremap <up> <NOP>
+noremap <down> <NOP>
+noremap <right> <NOP>
+noremap <left> <NOP>
+inoremap <up> <NOP>
+inoremap <down> <NOP>
+inoremap <right> <NOP>
+inoremap <left> <NOP>
+
+" http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
+let mapleader = "\<Space>"
+"Hit Enter to go to end of file.
+nnoremap <CR> G
+"Hit Backspace to go to beginning of file.
+nnoremap <BS> gg
+"Type <Space>w to save file (lot faster than :w<Enter>):
+nnoremap <Leader>w :w<CR>
+nnoremap <Leader>q :q<CR>
+nnoremap <Leader>s :wq<CR>
+nnoremap <Leader>v V
+
+"Automatically jump to end of text you pasted:
+"I can paste multiple lines multiple times with simple ppppp.
+vnoremap <silent> y y`]
+vnoremap <silent> p p`]
+nnoremap <silent> p p`]
+
 set shell=bash
 set timeoutlen=250 " Time to wait after ESC (default causes an annoying delay)
 set history=256 " Number of things to remember in history.
@@ -71,16 +105,8 @@ set foldlevel=100 " Don't autofold anything (but I can still fold manually)
 set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds
 set mousehide " Hide mouse after chars typed
 
-"highlight OverLength ctermbg=black ctermfg=white guibg=#592929
-"match OverLength /\%81v.*/
-
 "raccourcis pour tabedit
 nnoremap tt :tabedit<Space>
-
-"Styling
-"if $COLORTERM == 'gnome-terminal'
-"set t_Co=256
-"endif
 
 "Search
 set hlsearch " highlight search
@@ -88,22 +114,6 @@ set incsearch
 set ignorecase
 set smartcase
 
-"=====[ Highlight matches when jumping to next ]=============
-"nnoremap <silent> n n:call HLNext(0.4)<cr>
-"nnoremap <silent> N N:call HLNext(0.4)<cr>
-
-"=====[ Highlight the match in red ]=============
-" function! HLNext (blinktime)
-" let [bufnum, lnum, col, off] = getpos('.')
-" let matchlen = strlen(matchstr(strpart(getline('.'),col-1),@/))
-" let target_pat = '\c\%#'.@/
-" let ring = matchadd('WhiteOnRed', target_pat, 101)
-" redraw
-" exec 'sleep ' . float2nr(a:blinktime * 1000) . 'm'
-" call matchdelete(ring)
-" redraw
-" endfunction
-"Status Line
 set laststatus=2
 set statusline=\%L%m%r%h\ %w\ \ pwd:\ %r%{getcwd()}%h\ \ \ Line:\ %l
 "Scrolling
@@ -116,19 +126,10 @@ noremap <leader>P :set paste<CR>"*P<CR>:set nopaste<CR>
 :nmap Z :tabprev<CR>
 :nmap X :tabnext<CR>
 
-au BufRead,BufNewFile *.module set filetype=php
-au BufRead,BufNewFile *.install set filetype=php
-au BufRead,BufNewFile *.test set filetype=php
-au BufRead,BufNewFile *.inc set filetype=php
-au BufRead,BufNewFile *.profile set filetype=php
-au BufRead,BufNewFile *.view set filetype=php
 au BufNewFile,BufRead *.less set filetype=css
-au BufNewFile,BufRead *.html set filetype=html
-au BufNewFile,BufRead *.css set filetype=css
 au BufRead,BufNewFile *.js set ft=javascript syntax=javascript
 au BufRead,BufNewFile *.json set ft=json syntax=javascript
-au BufRead,BufNewFile *.twig set ft=htmldjango
-au BufRead,BufNewFile *.rabl set ft=ruby
+
 "Syntastic
 let g:syntastic_enable_signs = 1
 let g:syntastic_auto_loc_list=1
@@ -136,10 +137,13 @@ let g:syntastic_disabled_filetypes = ['html', 'sass', 'less']
 let g:syntastic_stl_format = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
 let g:syntastic_jsl_conf = '$HOME/.jshintrc'
 let g:syntastic_jshint_conf = '$HOME/.jshintrc'
+
 " automatically jump to last known position in a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
 " automatically reload vimrc when it's saved
 au BufWritePost .vimrc so ~/.vimrc
+
 " Clean whitespace
 noremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
 " NEERDTree
@@ -147,38 +151,7 @@ let NERDTreeShowBookmarks=1
 let NERDTreeWinSize=52
 let NERDTreeShowHidden=1
 nmap <silent> <n> :NERDTreeToggle<CR>
-" H and L to beginning and end of line
-noremap K H
-noremap J L
-" H and L to beginning and end of line
-noremap H ^
-noremap L g_
-" Disable arrow keys
-noremap <up> <NOP>
-noremap <down> <NOP>
-noremap <right> <NOP>
-noremap <left> <NOP>
-inoremap <up> <NOP>
-inoremap <down> <NOP>
-inoremap <right> <NOP>
-inoremap <left> <NOP>
-" http://sheerun.net/2014/03/21/how-to-boost-your-vim-productivity/
-let mapleader = "\<Space>"
-"Hit Enter to go to end of file.
-nnoremap <CR> G
-"Hit Backspace to go to beginning of file.
-nnoremap <BS> gg
-"Type <Space>w to save file (lot faster than :w<Enter>):
-nnoremap <Leader>w :w<CR>
-nnoremap <Leader>q :q<CR>
-nnoremap <Leader>s :wq<CR>
-nnoremap <Leader>v V
 
-"Automatically jump to end of text you pasted:
-"I can paste multiple lines multiple times with simple ppppp.
-vnoremap <silent> y y`]
-vnoremap <silent> p p`]
-nnoremap <silent> p p`]
 " powerline plugin
 let g:Powerline_symbols = 'fancy'
 
@@ -215,4 +188,5 @@ Bundle 'bling/vim-airline'
 call vundle#end() " required
 
 filetype plugin indent on " required
-let g:user_emmet_leader_key='<c-y>'
+
+"let g:user_emmet_leader_key='<c-y>'
