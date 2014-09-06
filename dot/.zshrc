@@ -1,5 +1,6 @@
-#Path to your oh-my-zsh configuration.
 ZSH=$HOME/.oh-my-zsh
+
+#plugins=(html git css)
 
 # Customize to your needs...
 export PATH=$PATH:/Applications/MAMP/Library/bin:/Users/xartot/bash-wordpress:/usr/local/bin/node:/Users/xartot/.npm/bin
@@ -9,7 +10,7 @@ export WP_CLI_PHP="/Applications/MAMP/bin/php/php5.4.10/bin/php"
 
 
 #open a project
-gotoweb(){
+web(){
   cd /Applications/MAMP/htdocs/$1
 }
 # autocompletion pour WP_CLI
@@ -20,15 +21,20 @@ autoload bashcompinit
 bashcompinit
 # initialize autocomplete here, otherwise functions won't be loaded
 # also load compdef so git-completion doesn't complain about no compdef
-#autoload -U compinit compdef
-#compinit
+autoload -U compinit compdef
+compinit
 #source $HOME/.wp-cli/vendor/wp-cli/wp-cli/utils/wp-completion.bash
 
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-ZSH_THEME="robbyrussell"
+# xav from: https://coderwall.com/p/e-tsng
+ZSH_THEME="gitsome"
+#ZSH_THEME="xav"
+#ZSH_THEME="arrow"
+#ZSH_THEME="apple"
+#ZSH_THEME="robbyrussell"
 #ZSH_THEME="pygmalion"
 
 
@@ -58,38 +64,15 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(git)
 source $ZSH/oh-my-zsh.sh
 
-#PATH=$PATH:/Applications/MAMP/Library/bin
-
 setopt correctall
 
 # autocompletion git
 # source ~/.git-completion.bash
 
-
-source ~/wp-completion.bash
-
-fancy-ctrl-z () {
-  if [[ $#BUFFER -eq 0 ]]; then
-    fg
-    zle redisplay
-  else
-    zle push-input
-    zle clear-screen
-  fi
-}
-zle -N fancy-ctrl-z
-bindkey '^Z' fancy-ctrl-z
-
-# cdd let you do a cd AND a ls in the same command
-function cdd()
-{
-  if [ "$*" = "" ]
-  then
-    cd
-  else
-    cd "$*";
-  fi
-  dir;
+# cd let you do a cd AND a ls in the same command
+# http://unix.stackexchange.com/questions/20396/make-cd-automatically-ls
+function cd {
+  builtin cd "$@" && ls -Fal
 }
 
 extract () {
@@ -113,37 +96,77 @@ extract () {
      fi
 }
 
+
 #Find text in any file
 ft() {
   find . -name "$2" -exec grep -il "$1" {} \;
 }
+
+
+source ~/wp-completion.bash
+
+fancy-ctrl-z () {
+  if [[ $#BUFFER -eq 0 ]]; then
+    fg
+    zle redisplay
+  else
+    zle push-input
+    zle clear-screen
+  fi
+}
+zle -N fancy-ctrl-z
+bindkey '^Z' fancy-ctrl-z
+
+
+alias h="history"
+# Add and commit changes with Git
+alias m="git add -A;git commit -m"
+#copy
+alias pc="pbcopy"
+#cppwd
+alias pcpwd="pwd | tr -d '\n' | pbcopy"
+#paste
+alias pp="pbpaste"
+# Show which commands you use the most
+alias freq='cut -f1 -d" " ~/.bash_history | sort | uniq -c | sort -nr | head -n 30'
+
+alias ....='cd ../../../'
+alias .4='cd ../../../../'
+alias .5='cd ../../../../../'
+alias .6='cd ../../../../../../'
+alias .7='cd ../../../../../../../'
+alias .8='cd ../../../../../../../../'
+# This alias reloads this file
+alias rzsh='. ~/.zshrc'
+
+alias c='clear'
+alias dir='ls -alv'
+alias le='ls --sort=extension'
+alias lle='ll --sort=extension'
+alias lt='ls --sort=time'
+alias llt='ll --sort=time'
+# This alias recursively destroys all .DS_Store files in the folder I am currently in
+alias killDS='find . -name .DS_Store -type f -delete'
+alias vi='vim'
+alias v='vim'
+
+# Softwares
+alias firefox='open -a firefox'
+alias ff='open -a firefox'
+alias chrome='open -a google\ chrome'
+alias safari='open -a safari'
+alias evernote='open -a evernote'
+
+export PAGER=most
 
 # loading the prompt
 autoload -U promptinit
 promptinit
 # list the promts
 #prompt -l
-prompt elite
+#prompt elite
 
 # autocompletion intelligente
-autoload -Uz compinit
-compinit
+#autoload -Uz compinit
+#compinit
 
-
-zstyle ':completion:*' auto-description 'specify: %d'
-zstyle ':completion:*' completer _expand _complete _correct _approximate
-zstyle ':completion:*' format 'Completing %d'
-zstyle ':completion:*' group-name ''
-zstyle ':completion:*' menu select=2
-eval "$(dircolors -b)"
-zstyle ':completion:*:default' list-colors ${(s.:.)LS_COLORS}
-zstyle ':completion:*' list-colors ''
-zstyle ':completion:*' list-prompt %SAt %p: Hit TAB for more, or the character to insert%s
-zstyle ':completion:*' matcher-list '' 'm:{a-z}={A-Z}' 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=* l:|=*'
-zstyle ':completion:*' menu select=long
-zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
-zstyle ':completion:*' use-compctl false
-zstyle ':completion:*' verbose true
- 
- zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
- zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'

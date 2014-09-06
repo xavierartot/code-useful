@@ -8,26 +8,29 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'rizzatti/funcoo.vim'
 Plugin 'rizzatti/dash.vim'
-Plugin 'php.vim'
-"Plugin 'rainbow_parentheses.vim'
-"Plugin 'vim-coffee-script'
 Plugin 'vim-less'
-"Plugin 'jQuery'
 Plugin 'Markdown'
-"Plugin 'git.zip'
 Plugin 'fugitive.vim'
 Plugin 'ragtag.vim'
 Plugin 'gmarik/vundle'
 Plugin 'css_color.vim'
-Plugin 'MarcWeber/vim-addon-mw-utils'
-Plugin 'tomtom/tlib_vim'
-Plugin 'garbas/vim-snipmate'
+
+" snipmate
+"Plugin 'MarcWeber/vim-addon-mw-utils'
+"Plugin 'tomtom/tlib_vim'
+"Plugin 'garbas/vim-snipmate'
+"Plugin 'honza/vim-snippets'
+
+" Track the engine.
+Plugin 'SirVer/ultisnips'
+" Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
-"Plugin 'mattn/emmet-vim', {'autoload':{'filetypes':['html','xml','xsl','xslt','xsd','css','sass','scss','less','mustache']}}
+
 Plugin 'tpope/vim-obsession.git'
 Plugin 'jelera/vim-javascript-syntax'
 Plugin 'pangloss/vim-javascript'
 Plugin 'bling/vim-airline'
+Plugin 'scrooloose/nerdtree'
 
 " All of your Plugins must be added before the following line
 call vundle#end() " required
@@ -35,6 +38,11 @@ call vundle#end() " required
 filetype plugin indent on " required
 
 colorscheme sorcerer
+
+"Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<tab>"
+let g:UltiSnipsJumpBackwardTrigger="<s-tab>"
 
 set autoindent
 set expandtab
@@ -154,8 +162,9 @@ nnoremap Z  :tabprev<CR>
 nnoremap X  :tabnext<CR>
 
 " scrolling
-nnoremap <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
-nnoremap <C-D> <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
+" nnoremap <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
+" nnoremap <C-D> <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
+
 " pasting
 nnoremap <leader>p :set paste<CR>"*p<CR>:set nopaste<CR>
 nnoremap <leader>P :set paste<CR>"*P<CR>:set nopaste<CR>
@@ -181,13 +190,10 @@ augroup END
 let NERDTreeShowBookmarks = 1
 let NERDTreeWinSize       = 52
 let NERDTreeShowHidden    = 1
-nnoremap <silent> n :NERDTreeToggle<CR>
+"nnoremap <silent> n :NERDTreeToggle<CR>
 
 " powerline
 let g:Powerline_symbols = 'fancy'
-
-" emmet
-"let g:user_emmet_leader_key = '<c-y>'
 
 " syntastic
 let g:syntastic_enable_signs       = 1
