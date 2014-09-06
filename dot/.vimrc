@@ -8,12 +8,12 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'rizzatti/funcoo.vim'
 Plugin 'rizzatti/dash.vim'
-Plugin 'vim-less'
+"Plugin 'vim-less'
 Plugin 'Markdown'
 Plugin 'fugitive.vim'
 Plugin 'ragtag.vim'
 Plugin 'gmarik/vundle'
-Plugin 'css_color.vim'
+"Plugin 'css_color.vim'
 
 " snipmate
 "Plugin 'MarcWeber/vim-addon-mw-utils'
@@ -36,7 +36,8 @@ Plugin 'scrooloose/nerdtree'
 call vundle#end() " required
 
 filetype plugin indent on " required
-
+syntax on
+" les themes se trouvent dans ~/.vim/colors/
 colorscheme sorcerer
 
 "Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -103,7 +104,7 @@ set nowrap
 set report=0
 set shell=bash
 set shortmess=atI
-set syntax=on
+"set syntax=on
 set timeoutlen=250
 set wildmenu
 
@@ -111,9 +112,9 @@ set wildmenu
 let mapleader = "\<Space>"
 
 " visual mode
-nnoremap v     <C-V>
+nnoremap v <C-V>
 nnoremap <C-V> v
-xnoremap v     <C-V>
+xnoremap v <C-V>
 xnoremap <C-V> v
 
 " drag visual block
