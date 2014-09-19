@@ -8,7 +8,7 @@ Plugin 'gmarik/Vundle.vim'
 Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 Plugin 'rizzatti/funcoo.vim'
 Plugin 'rizzatti/dash.vim'
-"Plugin 'vim-less'
+Plugin 'vim-less'
 Plugin 'Markdown'
 Plugin 'fugitive.vim'
 Plugin 'ragtag.vim'
@@ -71,16 +71,20 @@ set foldlevel=100
 set foldmethod=marker
 set foldopen=block,hor,mark,percent,quickfix,tag " what movements open folds
 
-set mouse+=a
+if has("mouse")
+  set mouse=a
+endif
+"set mouse+=a
 set mousehide
 
 set visualbell t_vb=
 set noerrorbells
 set novisualbell
 
-set number
+"set number
 set numberwidth=4
 set relativenumber
+autocmd BufEnter * set relativenumber
 
 set showcmd
 set showmatch
@@ -195,7 +199,7 @@ let NERDTreeShowHidden    = 1
 
 " powerline
 let g:Powerline_symbols = 'fancy'
-
+ 
 " syntastic
 let g:syntastic_enable_signs       = 1
 let g:syntastic_auto_loc_list      = 1
@@ -203,3 +207,10 @@ let g:syntastic_disabled_filetypes = ['html', 'sass', 'less']
 let g:syntastic_stl_format         = '[%E{Error 1/%e: line %fe}%B{, }%W{Warning 1/%w: line %fw}]'
 let g:syntastic_jsl_conf           = '$HOME/.jshintrc'
 let g:syntastic_jshint_conf        = '$HOME/.jshintrc'
+
+"folding settings
+"`za` - toggles; `zc` - closes; `zo` - opens; `zR` - open all; `zM` - close all
+set foldmethod=indent   "fold based on indent
+set foldnestmax=10      "deepest fold is 10 levels
+set nofoldenable        "dont fold by default
+set foldlevel=1         "this is just what i use
