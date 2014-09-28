@@ -132,7 +132,7 @@ noremap K H
 noremap J L
 " H and L to beginning and end of line
 noremap H ^
-noremap L g_
+noremap L $
 
 " disable arrow keys
 nnoremap <up>    <NOP>
