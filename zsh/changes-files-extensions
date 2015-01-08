@@ -1,7 +1,0 @@
-#convertis l’estension de plusieurs fichiers
-# .mp3 to .wav
-
-foreach file (`ls`)
-mv $file `echo $file | sed -e 's/mp3/wav/'`
-end
-

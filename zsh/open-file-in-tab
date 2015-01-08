@@ -1,4 +1,0 @@
-# open all html in a tab FROM vim
-:args *.html | argdo tabe | tabdo syntax on
-# from terminal
-vim -p *.c
